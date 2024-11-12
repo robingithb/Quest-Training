@@ -100,7 +100,7 @@ public class SalaryManagement {
 
             employeeName = sc.nextLine();
 
-            // Check if the input is non-empty and only contains letters and spaces
+            // Check if the input is nonempty and only contains letters and spaces
             if (employeeName.matches("[a-zA-Z\\s]+") && !employeeName.trim().isEmpty()) {
                 break; // Valid input, exit the loop
             } else {

@@ -26,7 +26,7 @@ create table Author(
     first_name varchar(50) not null,
     last_name varchar(50)
     );
-
+    
     -- Borrowers table with the following columns:
 -- borrower_id (Primary Key, INT, Auto Increment)
 -- first_name (VARCHAR)
@@ -57,8 +57,8 @@ create table Loans(
     foreign key (book_id) references Books(book_id),
     check (return_date > loan_date)
     );
-
-
+    
+    
 -- Insert Records:
 -- Insert 5 records into each of the four tables (Books, Authors, Borrowers, and Loans).
 --  Ensure the data is realistic and consistent with the relationships between the tables.
@@ -90,7 +90,7 @@ insert into Loans(borrower_id,book_id,loan_date,return_date) values (6,11,"2024-
 
 -- Perform the Following SQL Operations:
 -- SELECT Queries:
--- Select all columns from the Books table.
+-- Select all columns from the Books table.            
 select * from Books;
 
 select * from Author;
@@ -127,7 +127,38 @@ select avg(price) from Books;
 select title from Books where book_id in (
 	select book_id from Loans where borrower_id in(
 		select borrower_id from Borrowers where datediff(curdate(),dob)/365 >30));
+	
+    
+update Books set genre = "fantasy" where book_id in (1,2,3);
+select count(*),genre from Books group by genre;
+update Books set genre = "novel" where book_id in (4,5,6,11);
+
+-- start (begin) transaction,commit,rollback,savepoint tcl commands
+start transaction ;
+update Books set title = "Aaadugeevitham" where book_id =1;
+savepoint sp1;
+update Books set title = "Apna Collge" where book_id = 4;
+savepoint sp2;
+insert into Books (title,author_id,publication_year,price) values("Zero",2,2017,299);
+savepoint sp3;
+update Books set title = "Zero to Hero" where title = "Zero";
+
+rollback to sp2;
+
+-- creating view  performing operations
+
+create view novel_list as 
+	select book_id , title  from Books where genre = "novel";
+    
+select * from novel_list;
+
+update novel_list set title =  "Aaaarachar" where book_id = 5;
+
+select * from Books;
+
+drop view novel_list;
 
 
 
-
+            
+    

@@ -3,8 +3,6 @@ package com.quest.oops.day10;
 public class EquityStockAnalyzer extends StockAnalyzer{
 
     String sector;
-    int maxPrice = 0;
-    int minPrice = 0;
     double avgPrice = 0;
     int[] trend ;
     EquityStockAnalyzer(String stockName,String stockSymbol,int[] prices,String sector){
@@ -23,7 +21,7 @@ public class EquityStockAnalyzer extends StockAnalyzer{
                 max = prices[i];
             }
         }
-        maxPrice = max;
+
         return max;
     }
 
@@ -38,7 +36,7 @@ public class EquityStockAnalyzer extends StockAnalyzer{
                 min = prices[i];
             }
         }
-        minPrice = min;
+
         return min;
     }
 
@@ -97,15 +95,15 @@ public class EquityStockAnalyzer extends StockAnalyzer{
 
     @Override
     void displayAnalysis() {
-
+        int[] trend  = findLongestIncreasingTrend();
         System.out.println("Analysis for Equity Stocks");
         System.out.println("Stock Name = "+super.stockName);
         System.out.println("Stock Symbol = "+super.stockSymbol);
         System.out.println("Sector = "+this.sector);
-        System.out.println("Highest price = "+this.maxPrice);
-        System.out.println("Lowest Price = "+this.minPrice);
-        System.out.println("Average price = "+this.avgPrice);
-        System.out.println("Longest Increasing Trend : start day: "+this.trend[0] +" End day : "+this.trend[1] +" Length : "+this.trend[2]);
+        System.out.println("Highest price = "+findMaxPrice());
+        System.out.println("Lowest Price = "+findMinPrice());
+        System.out.println("Average price = "+calculateAveragePrice());
+        System.out.println("Longest Increasing Trend : start day: "+(trend[0]+1) +" End day : "+(trend[1]+1) +" Length : "+trend[2]);
 
     }
 }

@@ -3,10 +3,8 @@ package com.quest.oops.day10;
 public class CommodityStockAnalyzer extends StockAnalyzer{
 
     String commodityType;
-    int CommodityMaxPrice = 0;
-    int CommodityMinPrice = 0;
-    double CommodityAvgPrice = 0;
-    int[] CommodityTrend ;
+
+
     CommodityStockAnalyzer(String stockName,String stockSymbol,int[] prices, String commodityType){
         super(stockName,stockSymbol,prices);
         this.commodityType = commodityType;
@@ -24,27 +22,29 @@ public class CommodityStockAnalyzer extends StockAnalyzer{
                 max = prices[i];
             }
         }
-        CommodityMaxPrice = max;
-        return CommodityMaxPrice;
+
+        return max;
     }
 
     @Override
     int findMinPrice() {
+        int min;
         if (prices == null || prices.length == 0) {
             return -1; // price is empty so we cant find min
         }
-        int min = prices[0];
+        min = prices[0];
         for(int i = 1;i< prices.length;i++){
             if (min > prices[i]){
                 min = prices[i];
             }
         }
-        CommodityMinPrice = min;
-        return CommodityMinPrice;
+
+        return min;
     }
 
     @Override
     double calculateAveragePrice() {
+        double avg;
         if (prices == null || prices.length == 0) {
             return -1;// price is empty so we cant find avg
         }
@@ -53,13 +53,13 @@ public class CommodityStockAnalyzer extends StockAnalyzer{
         for (int price : prices) {
             totalPrice += price;
         }
-        CommodityAvgPrice = totalPrice/prices.length;
-        return CommodityAvgPrice;
+        avg= totalPrice/prices.length;
+        return avg;
     }
 
     @Override
     int[] findLongestIncreasingTrend() {
-        if (super.prices == null || prices.length == 0) {
+        if (prices == null || prices.length == 0) {
             return new int[]{-1, -1, 0}; // No trend possible
         }
 
@@ -92,19 +92,20 @@ public class CommodityStockAnalyzer extends StockAnalyzer{
 
         // Calculate the end index of the longest trend
         int endOfMax = startOfMax + maxLength - 1;
-        CommodityTrend = new int[]{startOfMax, endOfMax, maxLength};
-        return CommodityTrend;
+
+        return new  int[]{startOfMax, endOfMax, maxLength};
     }
 
     @Override
     void displayAnalysis() {
-        System.out.println("Analysis for Equity Commodity ");
+        int[] CommodityTrend  = findLongestIncreasingTrend();
+        System.out.println("Analysis for Commodity ");
         System.out.println("Stock Name = "+super.stockName);
         System.out.println("Stock Symbol = "+super.stockSymbol);
         System.out.println("Sector = "+this.commodityType);
-        System.out.println("Highest price = "+this.CommodityMaxPrice);
-        System.out.println("Lowest Price = "+this.CommodityMinPrice);
-        System.out.println("Average price = "+this.CommodityAvgPrice);
-        System.out.println("Longest Increasing Trend : start day: "+this.CommodityTrend[0] +" End day : "+this.CommodityTrend[1] +" Length : "+this.CommodityTrend[2]);
+        System.out.println("Highest price = "+findMaxPrice());
+        System.out.println("Lowest Price = "+findMinPrice());
+        System.out.println("Average price = "+calculateAveragePrice());
+        System.out.println("Longest Increasing Trend : start day: "+(CommodityTrend[0]+1 )+" End day : "+(CommodityTrend[1]+1) +" Length : "+CommodityTrend[2]);
     }
 }

@@ -5,12 +5,15 @@ public class EquityStockAnalyzer extends StockAnalyzer{
     String sector;
     double avgPrice = 0;
     int[] trend ;
+
+    //constructor for initializing
     EquityStockAnalyzer(String stockName,String stockSymbol,int[] prices,String sector){
         super(stockName,stockSymbol,prices);
         this.sector = sector;
     }
 
     @Override
+    //finding max price
     int findMaxPrice() {
         if (prices == null || prices.length == 0) {
             return -1; // price is empty so we cant find max
@@ -24,7 +27,7 @@ public class EquityStockAnalyzer extends StockAnalyzer{
 
         return max;
     }
-
+    //find for min price
     @Override
     int findMinPrice() {
         if (prices == null || prices.length == 0) {
@@ -39,7 +42,7 @@ public class EquityStockAnalyzer extends StockAnalyzer{
 
         return min;
     }
-
+//calculate avg price
     @Override
     double calculateAveragePrice() {
         if (prices == null || prices.length == 0) {
@@ -53,7 +56,7 @@ public class EquityStockAnalyzer extends StockAnalyzer{
         avgPrice = totalPrice/prices.length;
         return avgPrice;
     }
-
+    //t0 find the trend
     @Override
     int[] findLongestIncreasingTrend() {
         if (super.prices == null || prices.length == 0) {
@@ -92,7 +95,7 @@ public class EquityStockAnalyzer extends StockAnalyzer{
         trend = new int[]{startOfMax, endOfMax, maxLength};
         return trend;
     }
-
+    //to display details
     @Override
     void displayAnalysis() {
         int[] trend  = findLongestIncreasingTrend();

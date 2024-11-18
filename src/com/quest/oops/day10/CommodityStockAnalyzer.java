@@ -4,13 +4,13 @@ public class CommodityStockAnalyzer extends StockAnalyzer{
 
     String commodityType;
 
-
+    //constructor
     CommodityStockAnalyzer(String stockName,String stockSymbol,int[] prices, String commodityType){
         super(stockName,stockSymbol,prices);
         this.commodityType = commodityType;
 
     }
-
+    //overrides from parent class to find max price
     @Override
     int findMaxPrice() {
         if (prices == null || prices.length == 0) {
@@ -25,7 +25,7 @@ public class CommodityStockAnalyzer extends StockAnalyzer{
 
         return max;
     }
-
+    //overrides from parent class to find min price
     @Override
     int findMinPrice() {
         int min;
@@ -41,7 +41,7 @@ public class CommodityStockAnalyzer extends StockAnalyzer{
 
         return min;
     }
-
+    //overrides from parent class to calculate avg price
     @Override
     double calculateAveragePrice() {
         double avg;
@@ -56,7 +56,7 @@ public class CommodityStockAnalyzer extends StockAnalyzer{
         avg= totalPrice/prices.length;
         return avg;
     }
-
+    //overrides from parent class to find the trend
     @Override
     int[] findLongestIncreasingTrend() {
         if (prices == null || prices.length == 0) {
@@ -95,7 +95,7 @@ public class CommodityStockAnalyzer extends StockAnalyzer{
 
         return new  int[]{startOfMax, endOfMax, maxLength};
     }
-
+    //overrides from parent class to display the details
     @Override
     void displayAnalysis() {
         int[] CommodityTrend  = findLongestIncreasingTrend();

@@ -19,6 +19,7 @@ public class MainProgram {
         for (int i = 0; i < numberOfDays; i++) {
             prices[i] = sc.nextInt();
         }
+        //creating the object for EquityStockAnalyzer
         StockAnalyzer equity = new EquityStockAnalyzer(stockName, stockSymbol, prices, sector);
 
         System.out.println("Enter the Details for Commodity Stock");
@@ -36,6 +37,7 @@ public class MainProgram {
         for (int i = 0; i < commodityNumberOfDays; i++) {
             commodityPrices[i] = sc.nextInt();
         }
+        //creating objects for commodityAnalyzer
         StockAnalyzer commodity = new CommodityStockAnalyzer(commodityStockName, commodityStockSymbol, commodityPrices, commodityType);
 
 
@@ -44,7 +46,7 @@ public class MainProgram {
         commodity.displayAnalysis();
         System.out.println("\n");
 
-
+        //finding the highest avg price
         if (equity.calculateAveragePrice() > commodity.calculateAveragePrice()) {
 
             System.out.println("Stock with Highest Average Price: " + stockName + " with Average Price:  " + equity.calculateAveragePrice());
@@ -52,20 +54,17 @@ public class MainProgram {
             System.out.println("Stock with Highest Average Price: " + commodityStockName + " with Average Price:  " + commodity.calculateAveragePrice());
         }
         System.out.println("\n");
-
+        //find the max length of trend
         int[] trend = equity.findLongestIncreasingTrend();
         int[] commodityTrend = commodity.findLongestIncreasingTrend();
         if (trend[2] > commodityTrend[2]) {
-            System.out.println("Stock with Longest Increasing Trend: " +stockName + " length :" + trend[2]);
+            System.out.println("Stock with Longest Increasing Trend: " + stockName + " length :" + trend[2]);
         } else if (trend[2] < commodityTrend[2]) {
             System.out.println("Stock with Longest Increasing Trend: " + commodityStockName + " length :" + commodityTrend[2]);
         } else {
             System.out.println("Stock with Longest Increasing Trend: Both " + stockName + " and " + commodityStockName + " with a trend length of " + trend[2] + " days.\n");
 
         }
-
-
-//
 
     }
 }

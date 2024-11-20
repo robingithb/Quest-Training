@@ -3,7 +3,7 @@ package com.quest.oops.library;
 import java.util.Arrays;
 
 public class LibraryMember{
-    public static int BORROWED_COUNT = 0;
+    public static int BORROWED_COUNT = 0; //number of borrowed books
     private int memberId ;
     private  String memberName;
     private String contactInfo;
@@ -17,7 +17,7 @@ public class LibraryMember{
         this.contactInfo = contactInfo;
         this.borrowedBooks = borrowedBooks;
     }
-
+    //getters
     public int getMemberId() {
         return memberId;
     }
@@ -33,7 +33,7 @@ public class LibraryMember{
     public int[] getBorrowedBooks() {
         return borrowedBooks;
     }
-
+    //setters
     public void setMemberId(int memberId) {
         this.memberId = memberId;
     }
@@ -49,11 +49,18 @@ public class LibraryMember{
     public void setBorrowedBooks(int[] borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
     }
+    //for borrow the books
     public void borrow(int isbn,Book book){
+        //find the number of borrowed book
        int borrowLength = borrowedBooks.length;
-       if(BORROWED_COUNT < borrowLength && (book.getIsAvailable())){
+        for (int borrowedBook : borrowedBooks) {
+            if (borrowedBook != 0) {
+                BORROWED_COUNT++;
+            }
+        }
+        //checking the borrowed count is  less than the limit
+       if(book.getIsAvailable()){
            borrowedBooks[BORROWED_COUNT] = isbn;
-           BORROWED_COUNT +=1;
            book.setAvailable(false);
            System.out.println("book borrowed by "+getMemberName());
        }
@@ -61,16 +68,20 @@ public class LibraryMember{
            System.out.println("book can not borrowed");
        }
     }
+    //to return books
     public void returnBook(int isbn,Book book){
         boolean flag = false;
+        //finding the books object from the books array and  checking with its id
         for(int i =0;i<borrowedBooks.length;i++){
             if(borrowedBooks[i] == isbn){
-                for(int j = i;j<borrowedBooks.length-1;j++){
+                int j;
+                for( j = i;j<borrowedBooks.length-1;j++){
                     borrowedBooks[j] = borrowedBooks[j+1];
                 }
+//                borrowedBooks[j+1] = 0;
                 book.setAvailable(true);
-                borrowedBooks[BORROWED_COUNT] = 0;
-                BORROWED_COUNT -= 1;
+                borrowedBooks[borrowedBooks.length -1] = 0;
+//                BORROWED_COUNT -= 1;
                 System.out.println("book successfully returned");
                 flag = true;
             }
@@ -79,8 +90,9 @@ public class LibraryMember{
             System.out.println("Book not found");
         }
     }
+    //display the members
     public void displayMember(){
-        System.out.println("Member Id : "+memberId +"\nMember Name :"+getMemberName()+
+        System.out.println("\n Members \n Member Id : "+memberId +"\nMember Name :"+getMemberName()+
                 "\nContact Info : "+getContactInfo()+
                 "\nBorrowed Books : "+ Arrays.toString(getBorrowedBooks()));
     }

@@ -6,7 +6,7 @@ public class Book {
     private String author;
     private int year;
     private boolean isAvailable;
-
+    //constructor of book class
     Book(int isbn, String title, String author, int year, boolean isAvailable) {
         this.isbn = isbn;
         this.title = title;
@@ -14,7 +14,7 @@ public class Book {
         this.year = year;
         this.isAvailable = isAvailable;
     }
-
+    //getters
     public int getIsbn() {
         return isbn;
     }
@@ -33,7 +33,7 @@ public class Book {
     public boolean getIsAvailable(){
         return isAvailable;
     }
-
+    //setters
     public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
@@ -49,6 +49,7 @@ public class Book {
     public void setYear(int year) {
         this.year = year;
     }
+    //display each book
     public void displayBooks(){
         String status ;
         if(getIsAvailable()){
@@ -56,7 +57,7 @@ public class Book {
         }else{
             status  = "No";
         }
-        System.out.println("Book Id : "+isbn +"\nBook Name :"+getTitle() +
+        System.out.println("\n Books \n Book Id : "+isbn +"\nBook Name :"+getTitle() +
                 "\nAuthor Name : "+getAuthor() +
                 "\nPublished Year : "+getYear()+
                 "\nAvailable Status : "+status);

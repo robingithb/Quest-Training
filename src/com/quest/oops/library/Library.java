@@ -1,13 +1,12 @@
 package com.quest.oops.library;
 
 public class Library extends  LibraryOperations {
-    private Book book;
-    private LibraryMember libraryMember;
+
     private Book[] books;
     private int bookCount;
     private LibraryMember[] members;
     private int membersCount;
-
+    //getting total number of books and members
     Library(int totalBookCount , int totalMembers){
         this.books = new Book[totalBookCount];
         this.bookCount = 0;
@@ -16,7 +15,7 @@ public class Library extends  LibraryOperations {
 
     }
 
-
+    //to add book
     @Override
     public void addBook(Book book ) {
         if(book != null && bookCount < books.length){
@@ -28,7 +27,7 @@ public class Library extends  LibraryOperations {
             System.out.println("Book is not added");
         }
     }
-
+        //getters
     public Book[] getBooks() {
         return books;
     }
@@ -44,7 +43,7 @@ public class Library extends  LibraryOperations {
     public int getMembersCount() {
         return membersCount;
     }
-
+    //add members
     @Override
     public void addMember(LibraryMember member) {
         if(member != null && membersCount < members.length){
@@ -56,7 +55,7 @@ public class Library extends  LibraryOperations {
             System.out.println("Member is not added");
         }
     }
-
+    //search books
     @Override
     public void searchBook(int isbn) {
         Book[] books1 = getBooks();
@@ -73,7 +72,7 @@ public class Library extends  LibraryOperations {
             System.out.println("Book n ot found here");
         }
     }
-
+    //borrow the books
     @Override
     public void borrowBook(int isbn , int memberId) {
         Book[] books1 = getBooks();
@@ -107,7 +106,7 @@ public class Library extends  LibraryOperations {
                 System.out.println("Not found isbn");
         }
     }
-
+    //return the book
     @Override
     public void returnBook(int isbn , int memberId) {
         Book[] books1 = getBooks();
@@ -141,6 +140,7 @@ public class Library extends  LibraryOperations {
                 System.out.println("Not found isbn");
         }
     }
+    //display the books
     public void displayBooks(){
         Book[] books1 = getBooks();
         int bookCount = getBookCount();
@@ -151,6 +151,7 @@ public class Library extends  LibraryOperations {
             }
         }
     }
+    //display members
     public void displayMembers(){
         LibraryMember[] members1 = getMembers();
         int numberOfMembers = getMembersCount();

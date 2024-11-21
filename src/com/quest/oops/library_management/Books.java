@@ -73,9 +73,19 @@ public class Books {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Books" +
+                "\nisbn=" + isbn +
+                "\n title='" + title + '\'' +
+                "\n author='" + author + '\'' +
+                "\n isAvailable=" + isAvailable ;
+
+    }
+
     public static void displayBooks() {
         for (int i = 0; i < BOOKS_COUNT; i++) {
-            System.out.println(books[i].getTitle());
+            System.out.println(books[i].toString());
         }
     }
 }

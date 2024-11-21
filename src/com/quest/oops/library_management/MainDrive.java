@@ -11,18 +11,16 @@ public class MainDrive {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        MainDrive mainDrive =  new MainDrive();
         Members member;
         while (true) {
             System.out.println("\n Library Operations\n" +
                     "1 - Add book \n" +
-                    "2 - Search Book \n" +
+                    "2 - Add member \n" +
                     "3 - Borrow book \n" +
                     "4 - Return Book \n" +
-                    "5 - Add Member \n" +
-                    "6 - Display All books available \n" +
-                    "7 - All Members \n" +
-                    "8 - Quit \n" +
+                    "5 - Display All books available \n" +
+                    "6 - Display all the Members \n" +
+                    "7 - Exit from Library" +
                     "Enter the choice \n");
             int choice = intTypeCheck(sc);
             int bookId; //to use object of book
@@ -67,20 +65,16 @@ public class MainDrive {
                         System.out.println("Member is not found");
                     }
                     break;
-//                case 5:
-//                    //add member
-//                    member = addMember(sc);
-//                    library.addMember(member);
-//                    break;
-//                case 6:
-//                    //display the books
-//                    library.displayBooks();
-//                    break;
-                case 7:
-                    //display   the members
+                case 5:
+                    //display   the books
                     Books.displayBooks();
-                case 8:
-                    //exiting from library
+                case 6:
+                    //display members
+                    System.out.println("Members in the Library");
+                    Members.displayMembers();
+                    break;
+                case 7:
+                    //exit from the library
                     System.out.println("Exiting from library");
                     break;
                 default:
@@ -88,7 +82,7 @@ public class MainDrive {
                     System.out.println("Invalid option");
                     break;
             }
-            if (choice == 8) {
+            if (choice == 7) {
                 break;
             }
         }
@@ -97,11 +91,9 @@ public class MainDrive {
         Members[] members1 = Members.getMembers();
         int memberCount = Members.getMemberCount();
         Members mem = null;
-        boolean flag2 = false;
         for (int i = 0; i < memberCount; i++) {
             if (members1[i].getMemberId() == memberId ) {
                 mem = members1[i];
-                flag2 = true;
                 return mem;
             }
         }

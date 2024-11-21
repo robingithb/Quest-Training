@@ -1,5 +1,7 @@
 package com.quest.oops.library_management;
 
+import java.util.Arrays;
+
 public class Members implements LibraryOperations{
 
     private static final int BORROW_LIMIT = 5;
@@ -100,9 +102,8 @@ public class Members implements LibraryOperations{
                 }
             }
             if (!flag1)
-                System.out.println("Not found isbn");
+                System.out.println("Not found isbn or limit");
         }
-
     }
 
     @Override
@@ -112,7 +113,7 @@ public class Members implements LibraryOperations{
         if ( members != null) {
             boolean flag1 = false;
             for (int i = 0; i < bookCount; i++) {
-                if (books1[i].getIsbn() == isbn ) {
+                if (books1[i].getIsbn() == isbn && !books1[i].getIsAvailable() ) {
                     if(numberOfDates < WITHOUT_DUE ){
                         adjustBorrowedBook(isbn);
                         countOfBorrowed -= 1;
@@ -152,9 +153,18 @@ public class Members implements LibraryOperations{
         }
     }
 
-    public  void displayMembers(){
+    @Override
+    public String toString() {
+        return " memberId=" + memberId +
+                "\n memberName='" + memberName + '\'' +
+                "\n membershipType='" + membershipType + '\'' +
+                "\n borrowedBook=" + Arrays.toString(borrowedBook) +
+                "\n countOfBorrowed=" + countOfBorrowed ;
+    }
+
+    public  static void displayMembers(){
         for (int i =0;i<MEMBER_COUNT;i++){
-            System.out.println(members[i].getMemberName());
+            System.out.println(members[i].toString());
         }
     }
 

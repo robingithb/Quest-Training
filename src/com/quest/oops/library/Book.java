@@ -7,13 +7,17 @@ public class Book {
     private int year;
     private boolean isAvailable;
     //constructor of book class
-    Book(int isbn, String title, String author, int year, boolean isAvailable) {
+    public Book(int isbn, String title, String author, int year, boolean isAvailable) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.year = year;
         this.isAvailable = isAvailable;
     }
+
+    public Book(int isbn, String title, String author) {
+    }
+
     //getters
     public int getIsbn() {
         return isbn;

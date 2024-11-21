@@ -7,16 +7,16 @@ import java.util.Scanner;
 public class WeatherManagementMainDrive {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        WeatherManagementMainDrive weatherManagementMainDrive = new WeatherManagementMainDrive();
         System.out.println("Welcome to the Weather Monitoring System ");
         System.out.println("Enter the number of cities");
         int numberOfCities = intTypeCheck(sc);
         WeatherManagement cities;
-        for(int i = 0;i<numberOfCities;i++){
+        for(int i = 0;i<numberOfCities;i++){ //adding the cities
             cities = addCity(sc);
             WeatherManagement.addCities(cities);
         }
         WeatherManagement nation;
+        //for updating the temp,humidity,condition
         while(true) {
             System.out.println("Enter to update " +
                     "1 : temperature" +
@@ -80,6 +80,7 @@ public class WeatherManagementMainDrive {
 
 
     }
+    //get the city individually
     private static WeatherManagement findCity(String city){
         WeatherManagement[] cities = WeatherManagement.getCITIES();
         int numberCity = WeatherManagement.getNumberOfCities();
@@ -95,8 +96,9 @@ public class WeatherManagementMainDrive {
         }
         return null;
     }
-
+ //to add city
     private static WeatherManagement addCity(Scanner sc) {
+
         System.out.println("Enter the Name of the city");
         String cityName = stringTypeCheck(sc);
         System.out.println("Enter the current Temp");
@@ -108,7 +110,7 @@ public class WeatherManagementMainDrive {
         return new WeatherManagement(cityName,currentTemp,currentHumidity,currentCondition);
     }
 
-
+    //to check integer values
     private static int intTypeCheck(Scanner sc) {
         int value; //store  temporary
         while (!sc.hasNextInt()) {
@@ -118,23 +120,12 @@ public class WeatherManagementMainDrive {
         value = sc.nextInt();
         return value; //it returns the integer value
     }
-    //to check boolean values
-    private static boolean booleanTypeCheck(Scanner sc) {
-        boolean value; //store  temporary
-        while (!sc.hasNextBoolean()) {
-            System.out.println("Enter valid Boolean");
-            sc.next();
-        }
-        value = sc.nextBoolean();
-        return value; //it returns the boolean value
-    }
     //to check string values
     private static String stringTypeCheck(Scanner sc) {
         String str;
+        sc.nextLine();
         while (true) {
-
             str = sc.nextLine();
-
             // Check if the input is nonempty and only contains letters and spaces
             if (str.matches("[a-zA-Z\\s]+") && !str.trim().isEmpty()) {
                 break; // Valid input, exit the loop

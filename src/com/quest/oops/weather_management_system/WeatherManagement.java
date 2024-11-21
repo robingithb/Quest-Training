@@ -15,10 +15,10 @@ public class WeatherManagement extends WeatherOperations{
     private int currentTemp;
     private int currentHumidity;
     private String currentCondition;
-    private static ArrayList<String> sunny = new ArrayList<>();
-    private static ArrayList<String> cloudy = new ArrayList<>();
-    private static ArrayList<String> rainy = new ArrayList<>();
-    private static ArrayList<String> snow = new ArrayList<>();
+    private static ArrayList<String> sunny = new ArrayList<>();//for grouping sunny
+    private static ArrayList<String> cloudy = new ArrayList<>(); //for grouping cloudy
+    private static ArrayList<String> rainy = new ArrayList<>(); //for grouping rainy
+    private static ArrayList<String> snow = new ArrayList<>(); //for grouping snow
 
     WeatherManagement(String cityName, int currentTemp,int currentHumidity,String currentCondition){
         this.cityName = cityName;
@@ -64,9 +64,8 @@ public class WeatherManagement extends WeatherOperations{
     public void setSunny(ArrayList<String> sunny) {
         this.sunny = sunny;
     }
+
     //getters
-
-
     public String getCityName() {
         return cityName;
     }
@@ -114,7 +113,7 @@ public class WeatherManagement extends WeatherOperations{
     public static ArrayList<String> getSunny() {
         return sunny;
     }
-
+    // to add cities
     public static void addCities(WeatherManagement cities){
         if(NUMBER_OF_CITIES < MAX_CITIES){
             CITIES[NUMBER_OF_CITIES] = cities;
@@ -125,26 +124,26 @@ public class WeatherManagement extends WeatherOperations{
             System.out.println("City not added !!! try again");
         }
     }
-
+    //to update temperature of the city
     @Override
     public void updateCityTemperature(WeatherManagement weatherManagement, int newTemp) {
         weatherManagement.setCurrentTemp(newTemp);
         System.out.println("Updated with new temperature : "+weatherManagement.getCurrentTemp());
     }
-
+    //to update the humidity od a city
     @Override
     public void updateCityHumidity(WeatherManagement weatherManagement, int newHumidity) {
         weatherManagement.setCurrentHumidity(newHumidity);
         System.out.println("Updated with new Humidity : "+weatherManagement.getCurrentHumidity());
     }
-
+    //to update condition of the city
     @Override
     public void updateCityCondition(WeatherManagement weatherManagement, String newCondition) {
         weatherManagement.setCurrentCondition(newCondition);
         System.out.println("Updated with new Condition : "+weatherManagement.getCurrentCondition());
     }
 
-
+    //to find highest and lowest temperature
     public static void  highestAndLowestTemperature() {
         int highestTemp = CITIES[0].getCurrentTemp();
         int lowestTemp = CITIES[0].getCurrentTemp();
@@ -165,19 +164,22 @@ public class WeatherManagement extends WeatherOperations{
         System.out.println("City with Lowest temperature : "+lowTempCity.getCityName()+"("+lowestTemp+") degree Celsius");
     }
 
-
+//to find the cities ,that are greater the 80% of humidity
     public static void humidityCheck() {
-        System.out.println("\n Cities with Humidity > 80%:");
-        for (int i =0;i<NUMBER_OF_CITIES;i++){
-            if (CITIES[i].getCurrentHumidity() > HUMIDITY_LIMIT){
+        System.out.println("\nCities with Humidity > 80%:");
+        boolean flag = false;
+        for (int i =0;i<NUMBER_OF_CITIES;i++) {
+            if (CITIES[i].getCurrentHumidity() > HUMIDITY_LIMIT) {
                 System.out.println(CITIES[i].getCityName());
-            }else {
-                System.out.println("No cities found");
+                flag = true;
             }
+        }
+          if (!flag){
+              System.out.println("No cities found");
         }
     }
 
-
+     //calculate the average
     public static void avgTemperature() {
         double avgTemp;
         int totalTemp = 0;
@@ -187,61 +189,67 @@ public class WeatherManagement extends WeatherOperations{
         avgTemp = (double) totalTemp /NUMBER_OF_CITIES;
         System.out.println("Average Temperature : "+avgTemp+" degree Celsius");
     }
-
+    //grouping the city based on the condition
     public static void groupingCities(){
         for(int i = 0;i<NUMBER_OF_CITIES;i++){
             if(CITIES[i].getCurrentCondition().equalsIgnoreCase("sunny")){
                 ArrayList<String> sunny = getSunny();
                 sunny.add(CITIES[i].getCityName());
+                continue;
             } else if (CITIES[i].getCurrentCondition().equalsIgnoreCase("rainy")) {
                 ArrayList<String> rainy = getRainy();
                 rainy.add(CITIES[i].getCityName());
+                continue;
             } else if (CITIES[i].getCurrentCondition().equalsIgnoreCase("snow")) {
                 ArrayList<String> snow = getSnow();
                 snow.add(CITIES[i].getCityName());
+                continue;
             }else {
                 ArrayList<String> cloudy = getCloudy();
                 cloudy.add(CITIES[i].getCityName());
             }
-            displayGroupedCities();
         }
+        displayGroupedCities();
     }
+    //display the groups of the conditions
     public static void displayGroupedCities(){
         System.out.println("Generating Reports");
         if(!getSunny().isEmpty()){
-            System.out.println("\nSunny "+ String.join(" ,",getSunny()));
+            System.out.println("Sunny ->"+ String.join(" ,",getSunny()));
         }
         if (!getCloudy().isEmpty()) {
-            System.out.println("\nCloudy "+ String.join(" ,",getCloudy()));
+            System.out.println("Cloudy ->"+ String.join(" ,",getCloudy()));
         }
         if (!getSnow().isEmpty()) {
-            System.out.println("\nSnow "+ String.join(" ,",getSnow()));
+            System.out.println("Snow ->"+ String.join(" ,",getSnow()));
         }
         if (!getRainy().isEmpty()) {
-            System.out.println("\nRainy "+ String.join(" ,",getRainy()));
+            System.out.println("Rainy ->"+ String.join(" ,",getRainy()));
         }
 
     }
+    //to  display the alerts
     public static void alerts(){
-        System.out.println("\n Alerts");
+        System.out.println("\nAlerts");
         for(int i = 0;i<NUMBER_OF_CITIES;i++){
             if(CITIES[i].getCurrentTemp() > HEATWAVE_LIMIT){
-                System.out.println("Heatwave Alert: "+CITIES[i]+" is experiencing extreme heat ("+CITIES[i].getCurrentTemp()+"°C)! ");
+                System.out.println("Heatwave Alert: "+CITIES[i].getCityName()+" is experiencing extreme heat ("+CITIES[i].getCurrentTemp()+"°C)! ");
             }
         }
         for(int i = 0;i<NUMBER_OF_CITIES;i++){
             if(CITIES[i].getCurrentHumidity() < LOW_HUMIDITY_LIMIT){
-                System.out.println("Low Humidity Alert: "+CITIES[i]+" is experiencing low humidity ("+CITIES[i].getCurrentTemp()+"%)! ");
+                System.out.println("Low Humidity Alert: "+CITIES[i].getCityName()+" is experiencing low humidity ("+CITIES[i].getCurrentTemp()+"%)! ");
             }
         }
     }
-
+//display the cities
     public static void displayCities(){
+        System.out.println("\nCities");
         for(int i=0;i<NUMBER_OF_CITIES;i++){
-            System.out.println("\nCity Name : "+CITIES[i].getCityName());
-            System.out.println("\nCurrent Temperature : "+CITIES[i].getCurrentTemp() );
-            System.out.println("\nCurrent Humidity : "+CITIES[i].getCurrentHumidity());
-            System.out.println("\nCurrent Condition : "+CITIES[i].getCurrentCondition());
+            System.out.println("City Name : "+CITIES[i].getCityName());
+            System.out.println("Current Temperature : "+CITIES[i].getCurrentTemp() );
+            System.out.println("Current Humidity : "+CITIES[i].getCurrentHumidity());
+            System.out.println("Current Condition : "+CITIES[i].getCurrentCondition());
             System.out.println("\n");
         }
     }

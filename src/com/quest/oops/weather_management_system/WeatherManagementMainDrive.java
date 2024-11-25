@@ -7,15 +7,17 @@ import java.util.Scanner;
 public class WeatherManagementMainDrive {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         System.out.println("Welcome to the Weather Monitoring System ");
         System.out.println("Enter the number of cities");
         int numberOfCities = intTypeCheck(sc);
         WeatherManagement cities;
+        WeatherManagement nation;
         for(int i = 0;i<numberOfCities;i++){ //adding the cities
             cities = addCity(sc);
             WeatherManagement.addCities(cities);
         }
-        WeatherManagement nation;
+
         //for updating the temp,humidity,condition
         while(true) {
             System.out.println("Enter to update " +

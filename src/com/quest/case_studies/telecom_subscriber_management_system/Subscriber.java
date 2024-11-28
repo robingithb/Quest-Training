@@ -3,7 +3,7 @@ package com.quest.case_studies.telecom_subscriber_management_system;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Subscribers implements Serializable {
+public abstract class Subscriber implements Serializable {
 
 //    D, name, phone number, plan type (Prepaid/Postpaid), and balance.
     private int subscriberId;
@@ -12,7 +12,7 @@ public abstract class Subscribers implements Serializable {
     private double balance;
     private ArrayList<CallDetails> callDetails = new ArrayList<>();
 
-    public Subscribers(int subscriberId,String subscriberName, int subscriberPhoneNumber, double balance) {
+    public Subscriber(int subscriberId, String subscriberName, int subscriberPhoneNumber, double balance) {
         this.subscriberId = subscriberId;
         this.subscriberName = subscriberName;
         this.subscriberPhoneNumber = subscriberPhoneNumber;
@@ -64,9 +64,12 @@ public abstract class Subscribers implements Serializable {
     //displaying the subscribers
     @Override
     public String toString() {
-        return "Subscriber ID :"+getSubscriberId() +
-                "Subscriber Name : "+getSubscriberName() +
-                "Subscriber PhoneNUmber : "+getSubscriberPhoneNumber() +
-                "Subscriber Balance : "+getBalance();
+        return "\nSubscriber ID :"+getSubscriberId() +
+                "\nSubscriber Name : "+getSubscriberName() +
+                "\nSubscriber PhoneNUmber : "+getSubscriberPhoneNumber() +
+                "\nSubscriber Balance : "+getBalance();
+    }
+    public String displaySubscriber(){
+        return this.toString();
     }
 }

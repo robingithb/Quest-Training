@@ -1,11 +1,11 @@
 package com.quest.case_studies.telecom_subscriber_management_system;
 
-public class PostpaidUsers extends Subscribers{
+public class PostpaidUsers extends Subscriber {
     private String subscriberPlanType;
     //constructor
-    public PostpaidUsers(int subscriberId, String subscriberName, int subscriberPhoneNumber, double balance , String subscriberPlanType) {
+    public PostpaidUsers(int subscriberId, String subscriberName, int subscriberPhoneNumber, double balance ) {
         super(subscriberId, subscriberName, subscriberPhoneNumber, balance);
-        this.subscriberPlanType = getSubscriberPlanType();
+        this.subscriberPlanType = "postpaid";
     }
 
 

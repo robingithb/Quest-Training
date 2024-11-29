@@ -120,6 +120,7 @@ public class MainDrive {
         //saving to file
         try {
             manager.saveSubscribers();
+            System.out.println("saved");
         } catch (Exception i) {
             i.printStackTrace();
         }

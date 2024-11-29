@@ -10,7 +10,7 @@ public class FileOperations {
 
     //saving subscribers
     // Save subscribers to file using BufferedOutputStream
-    public void saveSubscribers(ArrayList<Subscriber> subscribersList) {
+    public static  void saveSubscribers(ArrayList<Subscriber> subscribersList) {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(SUBSCRIBERS_FILE))) {
             for (Subscriber subscriber : subscribersList) {
                 String data = subscriber.getSubscriberId() + "," +
@@ -26,7 +26,7 @@ public class FileOperations {
     }
 
     // Save call details to file using BufferedOutputStream
-    public void saveCallDetails(ArrayList<CallDetails> callDetailsList) {
+    public static void saveCallDetails(ArrayList<CallDetails> callDetailsList) {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(CALL_HISTORY_FILE))) {
             for (CallDetails call : callDetailsList) {
                 String data = call.getCallType() + "," +
@@ -41,7 +41,7 @@ public class FileOperations {
     }
 
     // Load subscribers from file using BufferedInputStream
-    public ArrayList<Subscriber> loadSubscribers() {
+    public static ArrayList<Subscriber> loadSubscribers() {
         ArrayList<Subscriber> subscribersList = new ArrayList<>();
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(SUBSCRIBERS_FILE))) {
             byte[] buffer = bis.readAllBytes();
@@ -70,7 +70,7 @@ public class FileOperations {
     }
 
     // Load call details from file using BufferedInputStream
-    public ArrayList<CallDetails> loadCallDetails() {
+    public static  ArrayList<CallDetails> loadCallDetails() {
         ArrayList<CallDetails> callDetailsList = new ArrayList<>();
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(CALL_HISTORY_FILE))) {
             byte[] buffer = bis.readAllBytes();

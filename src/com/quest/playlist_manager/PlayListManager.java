@@ -5,28 +5,27 @@ import java.util.Map;
 public class PlayListManager implements PlayListOperations{
     //create a playlist
     @Override
-    public void createPlayList(String playListName, User user) {
+    public void createPlayList(String playListName, User user) throws DuplicateTrackException {
         PlayList playList1 =new PlayList(playListName);
         if(user.getUserPlayList().containsKey(playListName)){
-            throw new IllegalArgumentException("this play list already here");
+            throw new DuplicateTrackException("this play list already here");
         }
         user.getUserPlayList().put(playListName,playList1);
     }
     //remove a playlist from user
     @Override
-    public void removePlayList(String playListName, User user) {
+    public void removePlayList(String playListName, User user)  {
         if(!user.getUserPlayList().containsKey(playListName)){
-            throw new UnKnownTrack("PlayList not found here");
-        }
-        user.getUserPlayList().remove(playListName);
+            System.out.println("Not found the play list here...");
+        }else user.getUserPlayList().remove(playListName);
     }
 
     //get a play list from user
     @Override
-    public void getPlaylist(String name, User user) {
+    public void getPlaylist(String name, User user)  {
         PlayList playList = user.getUserPlayList().get(name);
         if (playList == null){
-            throw new UnKnownTrack("PlayList not found");
+            System.out.println("Not found the play list here...");
         }else {
             System.out.println(playList);
         }

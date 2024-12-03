@@ -64,13 +64,13 @@ public class Track  {
     //checks the tracks
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
+//        if (this == obj) {
+//            return true;
+//        }
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Track track = (Track) obj;
+        Track track = (Track) obj; //down casting
         return trackId == track.trackId;
     }
 }

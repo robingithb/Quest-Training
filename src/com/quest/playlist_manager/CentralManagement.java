@@ -18,13 +18,18 @@ public class CentralManagement {
         userManager = new UserOperationsImpl();
     }
  //here adding the track
-    public void addTrack(int trackId,String trackTitle,String trackArtist,Double duration,String userName,String playListName){
+    public void addTrack(int trackId,String trackTitle,String trackArtist,Double duration,String userName,String playListName) throws DuplicateTrackException {
         Track track = new Track(trackId,trackTitle,trackArtist,duration);
         if(allTracks.contains(track)){
             throw new DuplicateTrackException("track is already here");
         }
         allTracks.add(track);
     }
+    //display all tracks
+    public void displayAllTracks(){
+
+    }
+//    public void displayTracks()
     //adding track to playlist
     public void addTrackToPlayList(int trackId , String pLayListName , String username)throws DuplicateTrackException {
         PlayList playList = null;
@@ -87,7 +92,7 @@ public class CentralManagement {
             }
         }
         //create a playlist
-         public void createPlayList(String playListName , String userName){
+         public void createPlayList(String playListName , String userName) throws DuplicateTrackException {
              for (Map.Entry<String, User> entry : users.entrySet()) {
                  if (entry.getKey().equalsIgnoreCase(userName)) {
                     playListManager.createPlayList(playListName , entry.getValue());
@@ -95,7 +100,7 @@ public class CentralManagement {
              }
          }
          //remove a playlist
-         public void removePLayList(String playListName , String userName){
+         public void removePLayList(String playListName , String userName) throws UnKnownTrack {
              for (Map.Entry<String, User> entry : users.entrySet()) {
                  if (entry.getKey().equalsIgnoreCase(userName)) {
                      playListManager.removePlayList(playListName , entry.getValue());
@@ -103,7 +108,7 @@ public class CentralManagement {
              }
          }
          //get a play list from the user
-    public void getPLayListName(String playListName , String userName){
+    public void getPLayListName(String playListName , String userName) throws UnKnownTrack {
         for (Map.Entry<String, User> entry : users.entrySet()) {
             if (entry.getKey().equalsIgnoreCase(userName)) {
                 playListManager.getPlaylist(playListName , entry.getValue());
@@ -119,7 +124,7 @@ public class CentralManagement {
         }
     }
     //adding the user
-     public void addUser(String userName){
+     public void addUser(String userName) throws DuplicateTrackException {
         userManager.addUser(userName,users);
      }
      //remove user

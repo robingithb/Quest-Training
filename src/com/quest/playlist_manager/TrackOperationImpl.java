@@ -14,7 +14,7 @@ public class TrackOperationImpl implements TrackOperations {
                 return;
             }
         }
-        throw new UnKnownTrack("track not found");
+        System.out.println("the track is not added");
     }
     //remove tracks from playlist
     @Override
@@ -25,7 +25,7 @@ public class TrackOperationImpl implements TrackOperations {
                 return;
             }
         }
-        throw new UnKnownTrack("track not found");
+        System.out.println("the track is not removed");
     }
     //search track from playlist
     @Override
@@ -36,7 +36,7 @@ public class TrackOperationImpl implements TrackOperations {
                 return;
             }
         }
-        throw  new UnKnownTrack("track not found");
+        System.out.println("not found");
 
     }
     //display all tracks from playlist

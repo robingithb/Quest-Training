@@ -5,9 +5,9 @@ import java.util.Map;
 public class UserOperationsImpl implements UserOperations{
     //add user
     @Override
-    public void addUser(String userName , Map<String,User> users ) {
+    public void addUser(String userName , Map<String,User> users ) throws DuplicateTrackException {
         if (users.containsKey(userName)){
-            throw new UnKnownTrack("user already here");
+            throw new DuplicateTrackException("user already here");
         }
         User user = new User(userName);
         users.put(userName,user);
@@ -16,7 +16,7 @@ public class UserOperationsImpl implements UserOperations{
     @Override
     public void removeUser(String userName ,  Map<String,User> users) {
         if(!users.containsKey(userName)){
-            throw new UnKnownTrack("user not found here");
+            System.out.println("user not removed");
         }
         users.remove(userName);
     }

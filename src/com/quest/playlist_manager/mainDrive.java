@@ -31,8 +31,12 @@ public class mainDrive {
                     case 1:
                         System.out.print("Enter username: ");
                         String userName = stringTypeCheck(scanner);
-                        centralManagement.addUser(userName);
-                        System.out.println("User added successfully.");
+                        try {
+                            centralManagement.addUser(userName);
+                            System.out.println("User added successfully.");
+                        }catch (DuplicateTrackException d){
+                            d.printStackTrace();
+                        }
                         break;
                     case 2:
                         System.out.print("Enter username: ");
@@ -45,8 +49,12 @@ public class mainDrive {
                         userName = stringTypeCheck(scanner);
                         System.out.print("Enter playlist name: ");
                         String playlistName = stringTypeCheck(scanner);
-                        centralManagement.createPlayList(playlistName, userName);
-                        System.out.println("Playlist created successfully.");
+                        try {
+                            centralManagement.createPlayList(playlistName, userName);
+                            System.out.println("Playlist created successfully.");
+                        }catch (DuplicateTrackException e){
+                            e.printStackTrace();
+                        }
                         break;
                     case 4:
                         System.out.print("Enter username: ");
@@ -67,8 +75,13 @@ public class mainDrive {
                         System.out.print("Enter track duration: ");
                         double duration =doubleTypeCheck(scanner);
                         scanner.nextLine(); // Consume newline
-                        centralManagement.addTrack(trackId, trackTitle, trackArtist, duration, null, null);
-                        System.out.println("Track added to library successfully.");
+                        try {
+                            centralManagement.addTrack(trackId, trackTitle, trackArtist, duration, null, null);
+                            System.out.println("Track added to library successfully.");
+                        }catch (DuplicateTrackException e) {
+                            e.printStackTrace();
+                        }
+
                         break;
                     case 6:
                         System.out.print("Enter username: ");

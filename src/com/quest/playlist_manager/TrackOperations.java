@@ -6,6 +6,6 @@ public interface TrackOperations {
     void searchTrackFromPlayList(String trackName , PlayList playList);
     void displayAllTracksFromPlayList(PlayList playList);
     void findDuplicateFromTrack(PlayList playList);
-//    void sortTracks(Track track);
+   // void sortTracks(Track track);
 //    void shuffleTracks(Track track);
 }

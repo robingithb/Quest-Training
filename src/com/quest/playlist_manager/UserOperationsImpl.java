@@ -19,6 +19,7 @@ public class UserOperationsImpl implements UserOperations{
             System.out.println("user not removed");
         }
         users.remove(userName);
+        System.out.println("user removed..."+userName);
     }
 
    /* @Override

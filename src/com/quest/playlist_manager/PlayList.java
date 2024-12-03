@@ -38,4 +38,7 @@ public class PlayList {
                 ", listTracks=" + listTracks +
                 '}';
     }
+    public void displayPlaylist(){
+        System.out.println(this.toString());
+    }
 }

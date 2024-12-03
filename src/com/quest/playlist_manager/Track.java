@@ -56,6 +56,9 @@ public class Track  {
                 ", trackDuration=" + trackDuration +
                 '}';
     }
+    public void displayTracks(){
+        System.out.println(this.toString());
+    }
 
     @Override
     public int hashCode() {

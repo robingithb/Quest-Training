@@ -1,5 +1,6 @@
 package com.quest.playlist_manager;
 
+import com.quest.oops.library.Book;
 import com.quest.practice_variables.Palindrome;
 
 import java.util.List;
@@ -8,14 +9,14 @@ import java.util.TreeSet;
 public class TrackOperationImpl implements TrackOperations {
     //add tracks to the playlist
     @Override
-    public void addTrackToPlayList(int trackId , PlayList playList) {
+    public void addTrackToPlayList(int trackId , PlayList playList) throws DuplicateTrackException {
         for (Track track : playList.getListTracks()){
             if (track.getTrackId() == trackId){
                 playList.getListTracks().add(track);
                 return;
             }
         }
-        System.out.println("the track is not added");
+        throw new DuplicateTrackException("Duplicate track");
     }
     //remove tracks from playlist
     @Override
@@ -23,6 +24,7 @@ public class TrackOperationImpl implements TrackOperations {
         for (Track track : playList.getListTracks()){
             if (track.getTrackId() == trackId){
                 playList.getListTracks().remove(track);
+                System.out.println("track removed from the playlist");
                 return;
             }
         }
@@ -52,19 +54,16 @@ public class TrackOperationImpl implements TrackOperations {
     public void findDuplicateFromTrack(PlayList playList) {
 
             TreeSet<String> duplicate = new TreeSet<>();
+            boolean flag = false;
             for (Track track : playList.getListTracks()){
                 if(!duplicate.add(track.getTrackTitle())){
                     System.out.println(track.getTrackTitle()+ " is duplicate");
+                    flag = true;
                 }
         }
+            if(!flag){
+                System.out.println("No duplicates");
+            }
     }
 
-    @Override
-    public void sortTracks(String choice , List<Track>allTracks) {
-        if (choice.equalsIgnoreCase("title")){
-          allTracks.sort(new SortByTitleComparator());
-        }else if(choice.equalsIgnoreCase("duration")){
-            allTracks.sort(new SortByDurationComparator());
-        }
-    }
 }

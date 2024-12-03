@@ -11,16 +11,21 @@ public class MainDrive {
             System.out.println("\n===== Central Management System =====");
             System.out.println("1. Add User");
             System.out.println("2. Remove User");
-            System.out.println("3. Create Playlist");
-            System.out.println("4. Remove Playlist");
-            System.out.println("5. Add Track to Library");
-            System.out.println("6. Add Track to Playlist");
-            System.out.println("7. Remove Track from Playlist");
-            System.out.println("8. Find Duplicate Tracks in Playlist");
-            System.out.println("9. Search Track in Playlist");
-            System.out.println("10. Display All Tracks in Playlist");
-            System.out.println("11. Display All Playlists");
-            System.out.println("12. Exit");
+            System.out.println("3. Add tracks");
+            System.out.println("4. Create Playlist");
+            System.out.println("5. Remove Playlist");
+            System.out.println("6. add track to Playlist");
+            System.out.println("7. Remove track from Playlist");
+            System.out.println("8.Find duplicates");
+            System.out.println("9. Search track in playlist");
+            System.out.println("10. Sorting the tracks from playlist");
+            System.out.println("11.Merging the playlist");
+            System.out.println("12. Shuffle the playlist");
+            System.out.println("13. get playList of user");
+            System.out.println("14. Display All Tracks ");
+            System.out.println("15. Display All Playlists");
+            System.out.println("16. Display All tracks from Playlists");
+            System.out.println("17. Exit");
             System.out.print("Enter your choice: ");
 
             int choice =intTypeCheck(scanner);
@@ -42,32 +47,10 @@ public class MainDrive {
                         System.out.print("Enter username: ");
                         userName = stringTypeCheck(scanner);
                         centralManagement.removeUser(userName);
-                        System.out.println("User removed successfully.");
                         break;
-                    case 3:
-                        System.out.print("Enter username: ");
-                        userName = stringTypeCheck(scanner);
-                        System.out.print("Enter playlist name: ");
-                        String playlistName = stringTypeCheck(scanner);
-                        try {
-                            centralManagement.createPlayList(playlistName, userName);
-                            System.out.println("Playlist created successfully.");
-                        }catch (DuplicateTrackException e){
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 4:
-                        System.out.print("Enter username: ");
-                        userName =stringTypeCheck(scanner);
-                        System.out.print("Enter playlist name: ");
-                        playlistName = stringTypeCheck(scanner);
-                        centralManagement.removePLayList(playlistName, userName);
-                        System.out.println("Playlist removed successfully.");
-                        break;
-                    case 5:
+                    case 3 :
                         System.out.print("Enter track ID: ");
                         int trackId = intTypeCheck(scanner);
-                        scanner.nextLine(); // Consume newline
                         System.out.print("Enter track title: ");
                         String trackTitle =stringTypeCheck(scanner);
                         System.out.print("Enter track artist: ");
@@ -81,7 +64,25 @@ public class MainDrive {
                         }catch (DuplicateTrackException e) {
                             e.printStackTrace();
                         }
-
+                        break;
+                    case 4:
+                        System.out.print("Enter username: ");
+                        userName = stringTypeCheck(scanner);
+                        System.out.print("Enter playlist name: ");
+                        String playlistName = stringTypeCheck(scanner);
+                        try {
+                            centralManagement.createPlayList(playlistName, userName);
+                            System.out.println("Playlist created successfully.");
+                        }catch (DuplicateTrackException e){
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 5:
+                        System.out.print("Enter username: ");
+                        userName =stringTypeCheck(scanner);
+                        System.out.print("Enter playlist name: ");
+                        playlistName = stringTypeCheck(scanner);
+                        centralManagement.removePLayList(playlistName, userName);
                         break;
                     case 6:
                         System.out.print("Enter username: ");
@@ -91,8 +92,12 @@ public class MainDrive {
                         System.out.print("Enter track ID: ");
                         trackId = intTypeCheck(scanner);
                         scanner.nextLine(); // Consume newline
-                        centralManagement.addTrackToPlayList(trackId, playlistName, userName);
-                        System.out.println("Track added to playlist successfully.");
+                        try {
+                            centralManagement.addTrackToPlayList(trackId, playlistName, userName);
+                            System.out.println("Track added to playlist successfully.");
+                        }catch (DuplicateTrackException d){
+                            d.printStackTrace();
+                        }
                         break;
                     case 7:
                         System.out.print("Enter username: ");
@@ -103,7 +108,6 @@ public class MainDrive {
                         trackId = intTypeCheck(scanner);
                         scanner.nextLine(); // Consume newline
                         centralManagement.removeTrackFromPlaylist(trackId, playlistName, userName);
-                        System.out.println("Track removed from playlist successfully.");
                         break;
                     case 8:
                         System.out.print("Enter username: ");
@@ -122,18 +126,58 @@ public class MainDrive {
                         centralManagement.searchTrackFromPlayList(trackName, userName, playlistName);
                         break;
                     case 10:
+                        System.out.println("Enter choice duration / title");
+                        String ch = stringTypeCheck(scanner);
                         System.out.print("Enter username: ");
                         userName =stringTypeCheck(scanner);
                         System.out.print("Enter playlist name: ");
                         playlistName = stringTypeCheck(scanner);
-                        centralManagement.displayAllTracks(userName, playlistName);
+                        centralManagement.sortingThePlayList(ch,playlistName,userName);
                         break;
                     case 11:
                         System.out.print("Enter username: ");
-                        userName = stringTypeCheck(scanner);
-                        centralManagement.displayAllPlayList(userName);
+                        userName =stringTypeCheck(scanner);
+                        System.out.print("Enter playlist name: ");
+                        String playlist1 = stringTypeCheck(scanner);
+                        System.out.print("Enter playlist name: ");
+                        String playlist2 = stringTypeCheck(scanner);
+                        try{
+                            centralManagement.mergePlayList(userName,playlist1,playlist2);
+                            System.out.println("merged....!!!");
+                        }catch (DuplicateTrackException d){
+                            d.printStackTrace();
+                        }
                         break;
                     case 12:
+                        System.out.print("Enter username: ");
+                        userName =stringTypeCheck(scanner);
+                        System.out.print("Enter playlist name: ");
+                        playlistName = stringTypeCheck(scanner);
+                        centralManagement.shuffleTracksInThePlayList(playlistName,userName);
+                        break;
+                    case 13:
+                        System.out.print("Enter username: ");
+                        userName =stringTypeCheck(scanner);
+                        System.out.print("Enter playlist name: ");
+                        playlistName = stringTypeCheck(scanner);
+                        centralManagement.getPLayListFromUser(playlistName,userName);
+                        break;
+                    case 14:
+                        centralManagement.displayAllTracks();
+                        break;
+                    case 15:
+                        System.out.print("Enter username: ");
+                        userName =stringTypeCheck(scanner);
+                        centralManagement.displayAllPlayList(userName);
+                        break;
+                    case 16:
+                        System.out.print("Enter username: ");
+                        userName =stringTypeCheck(scanner);
+                        System.out.print("Enter playlist name: ");
+                        playlistName = stringTypeCheck(scanner);
+                        centralManagement.displayAllTracksInPlayList(userName,playlistName);
+                        break;
+                    case 17:
                         System.out.println("Exiting...");
                         scanner.close();
                         return;
@@ -156,22 +200,10 @@ public class MainDrive {
         return value; //it returns the integer value
     }
 
-    //to check boolean values
-    private static boolean booleanTypeCheck(Scanner sc) {
-        boolean value; //store  temporary
-        while (!sc.hasNextBoolean()) {
-            System.out.println("Enter valid Boolean");
-            sc.next();
-        }
-        value = sc.nextBoolean();
-        return value; //it returns the boolean value
-    }
-
     //to check string values
     private static String stringTypeCheck(Scanner sc) {
         String str;
         while (true) {
-            sc.nextLine();
 //            System.out.println("Enter a valid String (letters and spaces only): ");
             str = sc.nextLine();
             // Check if the input is nonempty and only contains letters and spaces

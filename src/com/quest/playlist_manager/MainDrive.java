@@ -2,7 +2,7 @@ package com.quest.playlist_manager;
 
 import java.util.Scanner;
 
-public class mainDrive {
+public class MainDrive {
     public static void main(String[] args) {
         CentralManagement centralManagement = new CentralManagement();
         Scanner scanner = new Scanner(System.in);

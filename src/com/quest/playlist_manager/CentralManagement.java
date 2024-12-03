@@ -27,7 +27,9 @@ public class CentralManagement {
     }
     //display all tracks
     public void displayAllTracks(){
-
+        for (Track track : allTracks){
+            track.toString();
+        }
     }
 //    public void displayTracks()
     //adding track to playlist
@@ -130,6 +132,9 @@ public class CentralManagement {
      //remove user
      public void removeUser(String userName){
         userManager.removeUser(userName,users);
+     }
+     public void sortingThePlayList(String choice){
+        trackManager.sortTracks(choice,allTracks);
      }
 
 

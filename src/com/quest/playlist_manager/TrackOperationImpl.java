@@ -2,6 +2,7 @@ package com.quest.playlist_manager;
 
 import com.quest.practice_variables.Palindrome;
 
+import java.util.List;
 import java.util.TreeSet;
 
 public class TrackOperationImpl implements TrackOperations {
@@ -55,6 +56,15 @@ public class TrackOperationImpl implements TrackOperations {
                 if(!duplicate.add(track.getTrackTitle())){
                     System.out.println(track.getTrackTitle()+ " is duplicate");
                 }
+        }
+    }
+
+    @Override
+    public void sortTracks(String choice , List<Track>allTracks) {
+        if (choice.equalsIgnoreCase("title")){
+          allTracks.sort(new SortByTitleComparator());
+        }else if(choice.equalsIgnoreCase("duration")){
+            allTracks.sort(new SortByDurationComparator());
         }
     }
 }

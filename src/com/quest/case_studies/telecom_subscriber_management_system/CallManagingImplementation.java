@@ -9,7 +9,7 @@ public class CallManagingImplementation implements CallManaging {
     public void recordCall(Subscriber subscriber, String callType, double duration) {
         //for get the current time
         LocalDateTime timestamp = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy hh:mm:4ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy hh:mm:ss");
         String time = timestamp.format(formatter); //formatted to string
         CallDetails callDetails = new CallDetails(callType, duration, time);
         subscriber.addCall(callDetails);

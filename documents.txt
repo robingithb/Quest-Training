@@ -1,0 +1,5 @@
+#Database Configuration
+#Thu Dec 05 10:12:36 IST 2024
+Password=Robin@123321
+User\ Name=robin@123
+url=www.robin.com
